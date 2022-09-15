@@ -5,7 +5,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private GameObject follower;
-    [SerializeField] private float speed;
+    [SerializeField] private float speedRun;
+    [SerializeField] private float speedRot;
 
     private void Start()
     {
@@ -19,8 +20,11 @@ public class Player : MonoBehaviour
 
     private void MoveForward()
     {
-        transform.position = Vector3.Lerp(transform.position, follower.transform.position, Time.deltaTime * speed);
-        //transform.LookAt();
+        transform.position = Vector3.Lerp(transform.position, follower.transform.position, Time.deltaTime * speedRun);
+
+        Vector3 dir = follower.transform.position - transform.position;
+        Quaternion rot = Quaternion.LookRotation(dir);
+        transform.rotation = Quaternion.Lerp(transform.rotation, rot, speedRot * Time.deltaTime);
     }
 
     private void OnTriggerEnter(Collider other)
