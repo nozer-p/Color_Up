@@ -17,10 +17,14 @@ namespace PathCreation.Examples
         private float borderDistance = 0f;
         private float offset = 0f;
 
+        private void Awake()
+        {
+            SwipeDetection.onSwipe += OnSwipe;
+        }
+
         void Start()
         {
             borderDistance = Mathf.Abs(rightBorder - leftBorder);
-            SwipeDetection.onSwipe += OnSwipe;
          
             if (pathCreator != null)
             {
@@ -45,17 +49,20 @@ namespace PathCreation.Examples
 
         void OnSwipe(Vector2 delta)
         {
-            offset = borderDistance * normCoef * delta.x / Screen.width;
-
-            transform.position = new Vector3(transform.position.x + offset, transform.position.y, transform.position.z);
-
-            if (transform.position.x > rightBorder)
+            if (pathCreator != null)
             {
-                transform.position = new Vector3(rightBorder, transform.position.y, transform.position.z);
-            }
-            else if (transform.position.x < leftBorder)
-            {
-                transform.position = new Vector3(leftBorder, transform.position.y, transform.position.z);
+                offset = borderDistance * normCoef * delta.x / Screen.width;
+
+                transform.position = new Vector3(transform.position.x + offset, transform.position.y, transform.position.z);
+
+                if (transform.position.x > rightBorder)
+                {
+                    transform.position = new Vector3(rightBorder, transform.position.y, transform.position.z);
+                }
+                else if (transform.position.x < leftBorder)
+                {
+                    transform.position = new Vector3(leftBorder, transform.position.y, transform.position.z);
+                }
             }
         }
     }

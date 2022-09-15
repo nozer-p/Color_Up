@@ -17,7 +17,6 @@ namespace PathCreation.Examples {
                 var follower = Instantiate (followerPrefab);
                 follower.pathCreator = path;
                 path.transform.parent = t;
-                
             }
         }
     }

@@ -8,27 +8,72 @@ public class Player : MonoBehaviour
     [SerializeField] private float speedRun;
     [SerializeField] private float speedRot;
 
+    private bool isMove;
+    private Animator animator;
+    private bool isDead;
+
+    [SerializeField] private Rigidbody[] rigidbodies;
+
     private void Start()
     {
+        animator = GetComponent<Animator>();
         follower = GameObject.FindGameObjectWithTag("Follower");
+        
+        for(int i = 0; i < rigidbodies.Length; i++)
+        {
+            rigidbodies[i].isKinematic = true;
+        }
     }
 
     private void Update()
     {
-        MoveForward();
+        if (!isDead)
+        {
+            MoveForward();
+        }
+        else
+        {
+            animator.enabled = false;
+        }
     }
 
     private void MoveForward()
     {
-        transform.position = Vector3.Lerp(transform.position, follower.transform.position, Time.deltaTime * speedRun);
+        if (isMove)
+        {
+            animator.SetBool("isRun", true);
 
-        Vector3 dir = follower.transform.position - transform.position;
-        Quaternion rot = Quaternion.LookRotation(dir);
-        transform.rotation = Quaternion.Lerp(transform.rotation, rot, speedRot * Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, follower.transform.position, Time.deltaTime * speedRun);
+
+            Vector3 dir = follower.transform.position - transform.position;
+            Quaternion rot = Quaternion.LookRotation(dir);
+            transform.rotation = Quaternion.Lerp(transform.rotation, rot, speedRot * Time.deltaTime);
+        }
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void OffMove()
     {
+        isMove = false;
+    }
 
+    public void OnMove()
+    {
+        isMove = true;
+    }
+
+    public void Die()
+    {
+        isDead = true;
+
+        for (int i = 0; i < rigidbodies.Length; i++)
+        {
+            rigidbodies[i].isKinematic = false;
+        }
+    }
+
+    public void Victory()
+    {
+        OffMove();
+        animator.SetBool("isVictory", true);
     }
 }
