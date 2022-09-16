@@ -212,10 +212,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pathCreator: {fileID: 0}
-  endOfPathInstruction: 0
+  endOfPathInstruction: 2
   speed: 15
-  leftBorder: -0.5
-  rightBorder: 0.5
+  leftBorder: -0.7
+  rightBorder: 0.7
   normCoef: 0.6
 --- !u!1 &9153281175672314244
 GameObject:

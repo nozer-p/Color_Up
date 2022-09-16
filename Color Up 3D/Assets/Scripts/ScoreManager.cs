@@ -8,9 +8,11 @@ public class ScoreManager : MonoBehaviour
 {
     private TextMeshProUGUI scoreUI;
     private int score;
+    private Player player;
 
     private void Start()
     {
+        player = FindObjectOfType<Player>();
         score = 0;
         scoreUI = GetComponent<TextMeshProUGUI>();    
     }
@@ -40,10 +42,19 @@ public class ScoreManager : MonoBehaviour
         {
             score = 10;
         }
+        else
+        {
+            player.gameObject.transform.localScale += Vector3.one * 0.07f;
+        }
     }
 
     public void MinusScore()
     {
         score -= 1;
+
+        if (score > 0)
+        {
+            player.gameObject.transform.localScale -= Vector3.one * 0.07f;
+        }
     }
 }

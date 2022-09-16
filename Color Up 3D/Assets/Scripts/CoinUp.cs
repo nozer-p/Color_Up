@@ -7,6 +7,8 @@ public class CoinUp : MonoBehaviour
     [SerializeField] private Material playerMaterial;
     private ScoreManager scoreManager;
 
+    [SerializeField] private GameObject[] colors;
+
     private void Start()
     {
         scoreManager = FindObjectOfType<ScoreManager>();
@@ -25,6 +27,15 @@ public class CoinUp : MonoBehaviour
                 scoreManager.MinusScore();
             }
             Destroy(other.gameObject);
+        }
+
+        if (other.gameObject.CompareTag("ChangeColor"))
+        {
+            playerMaterial = other.gameObject.GetComponent<ColorsPlayer>().GetMat();
+            for (int i = 0; i < colors.Length; i++)
+            {
+                colors[i].GetComponent<SkinnedMeshRenderer>().material = other.gameObject.GetComponent<ColorsPlayer>().GetMat();
+            }
         }
     }
 }

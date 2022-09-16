@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Button play;
     [SerializeField] private Button playAgain;
 
+    [SerializeField] private GameObject victory;
+
     private ScoreManager scoreManager;
 
     private void Awake()
@@ -67,7 +69,8 @@ public class GameManager : MonoBehaviour
         if (player.transform.position.z > 698f)
         {
             player.Victory();
-            play.gameObject.SetActive(false);
+            play.gameObject.SetActive(true);
+            victory.SetActive(true);
         }
     }
 
@@ -88,6 +91,7 @@ public class GameManager : MonoBehaviour
 
     public void PlayAgainClick()
     {
+        PlayerPrefs.SetInt("IsStart", 1);
         Application.LoadLevel(Application.loadedLevel);
     }
 

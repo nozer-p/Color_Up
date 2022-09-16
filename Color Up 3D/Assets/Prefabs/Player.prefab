@@ -424,6 +424,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa84d833f8b70904da3e84fc3fa4b28b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerMaterial: {fileID: 2100000, guid: 3e4e07a9ef0f5514b9b6d596e3c78789, type: 2}
+  colors:
+  - {fileID: 9008329769240913677}
+  - {fileID: 1634529078609721245}
 --- !u!1 &1629985689146268884
 GameObject:
   m_ObjectHideFlags: 0
@@ -1889,7 +1893,7 @@ Transform:
   m_GameObject: {fileID: 5725605959817663758}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4421277338324919404}
@@ -1933,6 +1937,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedRun: 6
   speedRot: 12
+  rigidbodies:
+  - {fileID: 4878552441692549021}
+  - {fileID: 4878552441800635253}
+  - {fileID: 4878552442853033886}
+  - {fileID: 4878552442946821827}
+  - {fileID: 4878552442632679760}
+  - {fileID: 4878552442865013078}
+  - {fileID: 4878552442038402745}
+  - {fileID: 4878552442432398992}
+  timeStartDef: 0.2
 --- !u!1 &5846069098138886066
 GameObject:
   m_ObjectHideFlags: 0

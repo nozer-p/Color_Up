@@ -14,11 +14,14 @@ public class Player : MonoBehaviour
 
     [SerializeField] private Rigidbody[] rigidbodies;
 
+    private float timeStart;
+    [SerializeField] private float timeStartDef;
+
     private void Start()
     {
         animator = GetComponent<Animator>();
         follower = GameObject.FindGameObjectWithTag("Follower");
-        
+        timeStart = timeStartDef;
         for(int i = 0; i < rigidbodies.Length; i++)
         {
             rigidbodies[i].isKinematic = true;
@@ -41,13 +44,20 @@ public class Player : MonoBehaviour
     {
         if (isMove)
         {
-            animator.SetBool("isRun", true);
+            if (timeStart < 0)
+            {
+                animator.SetBool("isRun", true);
 
-            transform.position = Vector3.Lerp(transform.position, follower.transform.position, Time.deltaTime * speedRun);
+                transform.position = Vector3.Lerp(transform.position, follower.transform.position, Time.deltaTime * speedRun);
 
-            Vector3 dir = follower.transform.position - transform.position;
-            Quaternion rot = Quaternion.LookRotation(dir);
-            transform.rotation = Quaternion.Lerp(transform.rotation, rot, speedRot * Time.deltaTime);
+                Vector3 dir = follower.transform.position - transform.position;
+                Quaternion rot = Quaternion.LookRotation(dir);
+                transform.rotation = Quaternion.Lerp(transform.rotation, rot, speedRot * Time.deltaTime);
+            }
+            else
+            {
+                timeStart -= Time.deltaTime;
+            }
         }
     }
 
